@@ -15,104 +15,103 @@ export default function ProductCard({ product, index = 0 }) {
   const handleAddToCart = (e) => {
     e.preventDefault();
     addItem(product);
-    toast.success(`"${product.title}" added to cart!`, {
-      icon: '🛒',
-      style: { borderRadius: '12px', fontWeight: 500 },
+    toast.success(`"${product.title}" added!`, {
+      icon: '🛍️',
+      style: { 
+        borderRadius: '20px', 
+        fontSize: '14px', 
+        fontWeight: '900',
+        background: '#111118',
+        color: '#fff',
+        border: '1px solid #2d2d4e'
+      },
     });
   };
 
   const handleWishlist = (e) => {
     e.preventDefault();
     toggle(product);
-    toast(wished ? 'Removed from wishlist' : 'Added to wishlist ❤️', {
-      style: { borderRadius: '12px', fontWeight: 500 },
+    toast(wished ? 'Removed' : 'Saved to Wishlist ❤️', {
+      style: { borderRadius: '20px', fontWeight: '900' },
     });
   };
 
   return (
     <motion.div
-      initial={{ opacity: 0, y: 24 }}
+      initial={{ opacity: 0, y: 30 }}
       animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.35, delay: index * 0.05 }}
+      transition={{ duration: 0.5, delay: index * 0.05 }}
+      className="group relative"
     >
-      <Link to={`/product/${product.id}`} className="card card-hover group flex flex-col overflow-hidden block">
-        {/* Image */}
-        <div className="relative overflow-hidden bg-gray-100 dark:bg-gray-800 aspect-[4/3]">
+      <Link to={`/product/${product.id}`} className="block">
+        {/* Image Container */}
+        <div className="relative aspect-[10/12] rounded-[2.5rem] overflow-hidden bg-gray-100 dark:bg-dark-800 border-4 border-white dark:border-dark-700 shadow-xl group-hover:shadow-card-hover transition-all duration-500">
           <img
             src={product.image}
             alt={product.title}
-            className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+            className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
             loading="lazy"
           />
 
-          {/* Badges */}
-          <div className="absolute top-3 left-3 flex flex-col gap-1.5">
+          {/* Badges Overlay */}
+          <div className="absolute top-4 left-4 flex flex-col gap-2 z-20">
             {product.badge && (
-              <span className={`badge text-white ${
-                product.badge === 'New' ? 'bg-emerald-500' :
-                product.badge === 'Sale' ? 'bg-red-500' :
-                product.badge === 'Bestseller' ? 'bg-primary-600' :
-                product.badge === 'Top Rated' ? 'bg-amber-500' :
-                product.badge === 'Eco' ? 'bg-green-600' :
-                'bg-gray-700'
-              }`}>{product.badge}</span>
+              <span className="px-3 py-1 bg-white/90 dark:bg-dark-900/90 backdrop-blur-md rounded-full text-[10px] font-black uppercase tracking-widest text-gray-900 dark:text-white shadow-sm border border-gray-200/50 dark:border-dark-border/50">
+                {product.badge}
+              </span>
             )}
             {discount > 0 && (
-              <span className="badge bg-red-500 text-white">−{discount}%</span>
+              <span className="px-3 py-1 bg-red-500 text-white rounded-full text-[10px] font-black uppercase tracking-widest shadow-glow-sm">
+                −{discount}%
+              </span>
             )}
           </div>
 
-          {/* Wishlist button */}
+          {/* Wishlist Button */}
           <button
             onClick={handleWishlist}
-            className={`absolute top-3 right-3 w-8 h-8 rounded-full shadow-lg flex items-center justify-center
-              transition-all duration-200 opacity-0 group-hover:opacity-100 translate-y-1 group-hover:translate-y-0
-              ${wished
-                ? 'bg-rose-500 text-white'
-                : 'bg-white dark:bg-gray-800 text-gray-600 hover:bg-rose-50 hover:text-rose-500'
+            className={`absolute top-4 right-4 w-10 h-10 rounded-2xl flex items-center justify-center transition-all duration-300 z-20 shadow-md backdrop-blur-md border border-white/20
+              ${wished 
+                ? 'bg-rose-500 text-white' 
+                : 'bg-white/70 dark:bg-dark-900/70 text-gray-900 dark:text-white hover:bg-rose-50 dark:hover:bg-rose-900/30 hover:text-rose-500'
               }`}
-            aria-label="Wishlist"
           >
-            <svg className="w-4 h-4" fill={wished ? 'currentColor' : 'none'} viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+            <svg className="w-5 h-5" fill={wished ? 'currentColor' : 'none'} viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2.5">
               <path strokeLinecap="round" strokeLinejoin="round" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
             </svg>
           </button>
 
-          {/* Quick add */}
-          <div className="absolute bottom-0 left-0 right-0 p-3 translate-y-full group-hover:translate-y-0 transition-transform duration-300">
-            <button
-              onClick={handleAddToCart}
-              className="w-full btn-primary justify-center py-2 text-sm"
-            >
-              Add to Cart
-            </button>
+          {/* Interaction Overlay */}
+          <div className="absolute inset-0 bg-black/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none" />
+          
+          <div className="absolute bottom-6 left-6 right-6 translate-y-12 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-300 z-20">
+             <button 
+                onClick={handleAddToCart}
+                className="w-full py-3 bg-brand-600 text-white font-black text-xs uppercase tracking-widest rounded-2xl shadow-glow-md flex items-center justify-center gap-2 hover:bg-brand-500 active:scale-95 transition-all"
+             >
+                <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="3" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z" /></svg>
+                QUICK ADD
+             </button>
           </div>
         </div>
 
-        {/* Info */}
-        <div className="p-4 flex flex-col gap-2 flex-1">
-          <span className="text-xs font-medium text-primary-600 dark:text-primary-400 uppercase tracking-wide">
-            {product.category}
-          </span>
-          <h3 className="font-semibold text-gray-900 dark:text-white text-sm leading-snug line-clamp-2 group-hover:text-primary-600 dark:group-hover:text-primary-400 transition-colors">
-            {product.title}
-          </h3>
-
-          <div className="flex items-center gap-1.5 mt-auto pt-1">
-            <StarRating rating={product.rating} size="sm" />
-            <span className="text-xs text-gray-400">({product.reviewCount})</span>
+        {/* Info Area */}
+        <div className="mt-6 px-2 space-y-2">
+          <p className="text-[10px] font-black uppercase tracking-widest text-brand-600 dark:text-brand-400 opacity-80">{product.category}</p>
+          <h3 className="text-lg font-black text-gray-900 dark:text-white leading-tight group-hover:text-brand-600 transition-colors line-clamp-1">{product.title}</h3>
+          
+          <div className="flex items-center justify-between pt-1">
+             <div className="flex flex-col">
+                <p className="text-xl font-black text-gray-900 dark:text-white leading-none">{formatPrice(product.price)}</p>
+                {product.originalPrice && (
+                  <p className="text-xs text-gray-400 line-through font-bold mt-1">{formatPrice(product.originalPrice)}</p>
+                )}
+             </div>
+             <div className="flex flex-col items-end">
+                <StarRating rating={product.rating} size="sm" />
+                <p className="text-[10px] font-bold text-gray-400 uppercase mt-1 tracking-tighter">{product.reviewCount} REVIEWS</p>
+             </div>
           </div>
-
-          <div className="flex items-baseline gap-2">
-            <span className="text-lg font-bold text-gray-900 dark:text-white">{formatPrice(product.price)}</span>
-            {product.originalPrice && (
-              <span className="text-sm text-gray-400 line-through">{formatPrice(product.originalPrice)}</span>
-            )}
-          </div>
-
-          {product.stock <= 10 && (
-            <p className="text-xs text-amber-600 font-medium">Only {product.stock} left in stock</p>
-          )}
         </div>
       </Link>
     </motion.div>

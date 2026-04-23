@@ -2,75 +2,57 @@ import { Link } from 'react-router-dom';
 
 export default function Footer() {
   return (
-    <footer className="bg-gray-900 dark:bg-black text-gray-400 mt-auto">
-      <div className="page-container py-12">
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
-          {/* Brand */}
-          <div className="col-span-2 md:col-span-1">
-            <div className="flex items-center gap-2 mb-4">
-              <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-primary-500 to-accent-500 flex items-center justify-center">
-                <span className="text-white font-bold text-sm">S</span>
+    <footer className="bg-gray-900 border-t border-white/5 pt-24 pb-12 overflow-hidden">
+      <div className="max-w-7xl mx-auto px-6">
+        <div className="grid md:grid-cols-4 gap-12 mb-20 relative">
+          <div className="absolute -top-40 -left-40 w-96 h-96 bg-brand-600/10 rounded-full blur-[120px]" />
+          
+          <div className="col-span-2 relative z-10">
+            <Link to="/" className="flex items-center gap-3 mb-8 group">
+              <div className="w-10 h-10 rounded-2xl bg-brand-600 flex items-center justify-center shadow-glow-sm">
+                <span className="text-white font-black text-xl italic tracking-tighter">S</span>
               </div>
-              <span className="font-extrabold text-xl text-white">
-                Shop<span className="text-primary-400">Sphere</span>
-              </span>
-            </div>
-            <p className="text-sm leading-relaxed text-gray-500">
-              Premium products, curated for modern living. Fast shipping, easy returns.
+              <span className="font-black text-2xl tracking-tighter text-white">SHOP<span className="opacity-40">SPHERE</span></span>
+            </Link>
+            <p className="text-xl font-bold text-gray-400 max-w-sm mb-10 italic leading-relaxed">
+              Redefining digital acquisition with precision curation and unmatched logistics.
             </p>
+            <div className="flex gap-4">
+               {['TW', 'IG', 'LI'].map(social => (
+                 <button key={social} className="w-12 h-12 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center text-xs font-black text-gray-500 hover:bg-brand-600 hover:text-white hover:border-brand-600 transition-all active:scale-90">
+                    {social}
+                 </button>
+               ))}
+            </div>
           </div>
 
-          {/* Shop */}
-          <div>
-            <h4 className="text-white font-semibold mb-4 text-sm">Shop</h4>
-            <ul className="space-y-2 text-sm">
-              {['All Products', 'Electronics', 'Clothing', 'Footwear', 'Home & Kitchen'].map(cat => (
-                <li key={cat}>
-                  <Link
-                    to={`/shop?category=${encodeURIComponent(cat === 'All Products' ? 'All' : cat)}`}
-                    className="hover:text-white transition-colors"
-                  >
-                    {cat}
-                  </Link>
-                </li>
-              ))}
+          <div className="relative z-10">
+            <h4 className="text-[10px] font-black uppercase tracking-[0.3em] text-white underline decoration-brand-600 decoration-4 underline-offset-8 mb-8">Navigation</h4>
+            <ul className="space-y-4">
+              <li><Link to="/shop" className="text-sm font-bold text-gray-500 hover:text-brand-600 transition-colors uppercase italic">Marketplace</Link></li>
+              <li><Link to="/wishlist" className="text-sm font-bold text-gray-500 hover:text-brand-600 transition-colors uppercase italic">Private Collection</Link></li>
+              <li><Link to="/cart" className="text-sm font-bold text-gray-500 hover:text-brand-600 transition-colors uppercase italic">Manifest Check</Link></li>
+              <li><Link to="/login" className="text-sm font-bold text-gray-500 hover:text-brand-600 transition-colors uppercase italic">Member Core</Link></li>
             </ul>
           </div>
 
-          {/* Account */}
-          <div>
-            <h4 className="text-white font-semibold mb-4 text-sm">Account</h4>
-            <ul className="space-y-2 text-sm">
-              {[
-                { label: 'Sign In', to: '/login' },
-                { label: 'Register', to: '/register' },
-                { label: 'Wishlist', to: '/wishlist' },
-                { label: 'Cart', to: '/cart' },
-              ].map(l => (
-                <li key={l.to}>
-                  <Link to={l.to} className="hover:text-white transition-colors">{l.label}</Link>
-                </li>
-              ))}
-            </ul>
-          </div>
-
-          {/* Support */}
-          <div>
-            <h4 className="text-white font-semibold mb-4 text-sm">Support</h4>
-            <ul className="space-y-2 text-sm">
-              {['FAQ', 'Shipping Policy', 'Return Policy', 'Contact Us'].map(i => (
-                <li key={i}><span className="hover:text-white transition-colors cursor-pointer">{i}</span></li>
-              ))}
+          <div className="relative z-10">
+            <h4 className="text-[10px] font-black uppercase tracking-[0.3em] text-white underline decoration-neon-cyan decoration-4 underline-offset-8 mb-8">Grid Sectors</h4>
+            <ul className="space-y-4">
+              <li><Link to="/shop?category=Electronics" className="text-sm font-bold text-gray-500 hover:text-neon-cyan transition-colors uppercase italic">Electronics</Link></li>
+              <li><Link to="/shop?category=Footwear" className="text-sm font-bold text-gray-500 hover:text-neon-cyan transition-colors uppercase italic">Footwear</Link></li>
+              <li><Link to="/shop?category=Outerwear" className="text-sm font-bold text-gray-500 hover:text-neon-cyan transition-colors uppercase italic">Apparel</Link></li>
+              <li><Link to="/shop?category=Home & Kitchen" className="text-sm font-bold text-gray-500 hover:text-neon-cyan transition-colors uppercase italic">Home Core</Link></li>
             </ul>
           </div>
         </div>
 
-        <div className="border-t border-gray-800 mt-10 pt-6 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-gray-600">
-          <span>© {new Date().getFullYear()} ShopSphere. All rights reserved.</span>
-          <div className="flex gap-4">
-            <span className="hover:text-gray-400 cursor-pointer transition-colors">Privacy</span>
-            <span className="hover:text-gray-400 cursor-pointer transition-colors">Terms</span>
-            <span className="hover:text-gray-400 cursor-pointer transition-colors">Cookies</span>
+        <div className="pt-10 border-t border-white/5 flex flex-col sm:flex-row items-center justify-between gap-6 text-[10px] font-black uppercase tracking-[0.2em] text-gray-600 italic">
+          <p>© 2025 ShopSphere Protocol. All rights reserved.</p>
+          <div className="flex gap-8">
+            <a href="#" className="hover:text-brand-600 transition-colors">Privacy Paradigm</a>
+            <a href="#" className="hover:text-brand-600 transition-colors">Term Vectors</a>
+            <a href="#" className="hover:text-brand-600 transition-colors">Cookie Schema</a>
           </div>
         </div>
       </div>

@@ -1,0 +1,17 @@
+services:
+  web:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "80:80"
+    restart: always
+    environment:
+      - VITE_APP_NAME=ShopSphere
+      - VITE_API_BASE_URL=https://fakestoreapi.com
+    networks:
+      - shopsphere-network
+
+networks:
+  shopsphere-network:
+    driver: bridge

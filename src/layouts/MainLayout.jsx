@@ -4,17 +4,24 @@ import { Toaster } from 'react-hot-toast';
 
 export default function MainLayout({ children }) {
   return (
-    <div className="min-h-screen flex flex-col bg-gray-50 dark:bg-surface-dark transition-colors duration-300">
+    <div className="min-h-screen flex flex-col bg-white dark:bg-dark-900 transition-colors duration-500">
       <Navbar />
-      <main className="flex-1 pt-20">
+      <main className="flex-1">
         {children}
       </main>
       <Footer />
       <Toaster
         position="bottom-right"
         toastOptions={{
-          duration: 2500,
-          className: 'dark:bg-surface-dark-card dark:text-white text-sm',
+          duration: 3500,
+          style: {
+            background: '#111118',
+            color: '#fff',
+            borderRadius: '20px',
+            border: '1px solid #2d2d4e',
+            fontSize: '14px',
+            fontWeight: '900',
+          },
         }}
       />
     </div>

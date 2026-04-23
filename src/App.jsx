@@ -1,6 +1,7 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { useEffect } from 'react';
 import { useThemeStore } from './store/themeStore';
+import ProtectedRoute from './components/ProtectedRoute';
 import MainLayout from './layouts/MainLayout';
 
 import HomePage from './pages/HomePage';
@@ -23,24 +24,36 @@ export default function App() {
         <Route path="/login"    element={<LoginPage />} />
         <Route path="/register" element={<RegisterPage />} />
 
-        {/* Main layout routes */}
+        {/* Home is public teaser */}
         <Route path="/" element={
           <MainLayout><HomePage /></MainLayout>
         } />
+
+        {/* Protected Routes */}
         <Route path="/shop" element={
-          <MainLayout><ShopPage /></MainLayout>
+          <ProtectedRoute>
+            <MainLayout><ShopPage /></MainLayout>
+          </ProtectedRoute>
         } />
         <Route path="/product/:id" element={
-          <MainLayout><ProductDetailPage /></MainLayout>
+          <ProtectedRoute>
+            <MainLayout><ProductDetailPage /></MainLayout>
+          </ProtectedRoute>
         } />
         <Route path="/cart" element={
-          <MainLayout><CartPage /></MainLayout>
+          <ProtectedRoute>
+            <MainLayout><CartPage /></MainLayout>
+          </ProtectedRoute>
         } />
         <Route path="/checkout" element={
-          <MainLayout><CheckoutPage /></MainLayout>
+          <ProtectedRoute>
+            <MainLayout><CheckoutPage /></MainLayout>
+          </ProtectedRoute>
         } />
         <Route path="/wishlist" element={
-          <MainLayout><WishlistPage /></MainLayout>
+          <ProtectedRoute>
+            <MainLayout><WishlistPage /></MainLayout>
+          </ProtectedRoute>
         } />
 
         {/* 404 fallback */}
