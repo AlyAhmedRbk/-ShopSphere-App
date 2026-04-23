@@ -110,6 +110,8 @@ VITE_API_BASE_URL=https://fakestoreapi.com
 VITE_ENABLE_ANALYTICS=false
 ```
 
+All Right Reserved
+
 ## 🔄 Swapping Mock Data for a Real API
 
 All API calls are centralized in `src/services/productService.js`. Replace the mock implementations with real `axios` calls pointing to your backend.
