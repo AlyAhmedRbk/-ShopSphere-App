@@ -43,7 +43,7 @@ export default function Navbar() {
             <span className="text-white font-black text-xl italic tracking-tighter">S</span>
           </div>
           <span className="font-black text-2xl tracking-tighter text-gray-900 dark:text-white group-hover:text-brand-600 transition-colors">
-            SHOP<span className="text-brand-600 opacity-80">SPHERE</span>
+            SHOP<span className="text-brand-600 opacity-80">SPHERE-V2</span>
           </span>
         </Link>
 
